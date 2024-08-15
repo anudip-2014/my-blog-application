@@ -8,7 +8,7 @@ class PostController extends Controller
 {
     public function index()
     {
-      $posts = Posts::all();
+      $posts = Post::all();
       return view('Posts.index', compact('posts'));    
     }
     public function create()
@@ -57,7 +57,7 @@ class PostController extends Controller
         /**
          * Remove the specified resource from storage.
          */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
         $post->delete();
         return redirect()->route('posts.index')

@@ -15,9 +15,7 @@ use App\Http\Controllers\PhotoController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::resource('photos', PhotoController::class);
 Route::resource('posts', PostController::class);
