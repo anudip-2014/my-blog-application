@@ -2,10 +2,11 @@
 
 
 @section('content')
-    <h1>Blog Posts Create</h1>
+<div class="col-lg-8">
+    <h1>Create Post</h1>
     <form action="{{ route('posts.store') }}" method="POST">
     @csrf 
-<div class="form-group">
+<div class="mb-3">
         <label for="title">Title</label>
         <input type="text" name="title" class="form-control" required>
 </div>
@@ -15,7 +16,7 @@
 </div>
 <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
+</div>
     
    
 @endsection

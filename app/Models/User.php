@@ -28,6 +28,7 @@ class User extends Eloquent implements AuthenticatableContract
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -48,8 +49,5 @@ class User extends Eloquent implements AuthenticatableContract
         ];
     }
 
-    public function post(): HasMany
-    {
-        return $this->hasMany(Post::class);
-    }
+   
 }

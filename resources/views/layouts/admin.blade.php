@@ -9,6 +9,7 @@
     <meta name="generator" content="Hugo 0.122.0">
     <title>@yield('title','Admin Dashboard')</title>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
 
     
@@ -319,10 +320,27 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+            <a class="nav-link d-flex align-items-center gap-2" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <svg class="bi"><use xlink:href="#door-closed"/></svg>{{ __('Logout') }}
+                                    </a>
+                                    
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+
+
+
+
+
+              <!-- <form class="nav-link d-flex align-items-center gap-2" action="{{ route('logout') }}">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
-                Sign out
-              </a>
+                @csrf
+              </form> -->
+              
+                                       
+                                  
             </li>
           </ul>
         </div>

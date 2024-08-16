@@ -1,16 +1,9 @@
 @extends('layouts.app')
 
-
 @section('content')
-    <h1>Blog Posts Details</h1>
-    <a href="{{ url()->previous() }}">Back</a>
-
-    <ul>
-       <li>ID: {{ $post->id}}</li>
-       <li>Title: {{ $post->title}}</li>
-       <li>Content: {{ $post->content}}</li>
-
-    </ul>
-
-   
+<div class="container">
+    <h1>{{ $post->title }}</h1>
+    <p>{{ $post->content }}</p>
+    <a href="{{ route('posts.index') }}">Back to Posts</a>
+</div>
 @endsection

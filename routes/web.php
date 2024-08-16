@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\PhotoController;
+
 
 
 
@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublicPostController;
+use App\Http\Controllers\Auth\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,16 +23,31 @@ use App\Http\Controllers\PublicPostController;
 |
 */
 
-Route::get('/', [PublicPostController::class, 'index'])->name('Posts');
-
-Route::resource('photos', PhotoController::class);
-
-Auth::routes();
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+Route::resource('/posts', PublicPostController::class);
+
+
+
+Route::get('/register/select-role', [RegisterController::class, 'showRoleSelectionForm'])->name('register.select-role');
+
+// Default User Registration Route
+Route::get('/register/user', [RegisterController::class, 'showUserRegistrationForm'])->name('register.user');
+
+// Author Registration Route
+Route::get('/register/author', [RegisterController::class, 'showAuthorRegistrationForm'])->name('register.author');
+
+
+
+
+Auth::routes();
+
+
+
+
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     // Dashboard route
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
@@ -44,8 +60,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('/posts', PostController::class);
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    
-    Route::resource('posts', PostController::class);
-    
+
+
+Route::middleware(['auth', 'role:author'])->group(function () {
+    // Allow authors to manage their posts
+    Route::resource('posts', PublicPostController::class)->except(['index', 'show']);
 });
