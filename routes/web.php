@@ -18,7 +18,12 @@ use App\Http\Controllers\PhotoController;
 Route::get('/', [PostController::class, 'index'])->name('Posts');
 
 Route::resource('photos', PhotoController::class);
-Route::resource('posts', PostController::class);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('posts', PostController::class);
+    
+});
