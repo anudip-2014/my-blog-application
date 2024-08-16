@@ -45,6 +45,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
+    
     Route::resource('posts', PostController::class);
     
 });
