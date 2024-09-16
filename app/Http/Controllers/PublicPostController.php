@@ -17,7 +17,7 @@ class PublicPostController extends Controller
     public function index()
     {
       $posts = Post::all();
-      return view('posts.index', compact('posts'));    
+      return response()->json($posts);    
     }
     public function create()
     {
