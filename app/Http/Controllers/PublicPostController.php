@@ -39,8 +39,9 @@ class PublicPostController extends Controller
                          ->with('success', 'Post created successfully.');
     }
 
-    public function show(Post $post)
+    public function show($id)
     {
+        $post = Post::find($id);
         return response()->json($post);
     }
         
