@@ -9,7 +9,7 @@ class PublicPostController extends Controller
     public function __construct()
     {
         // Apply the 'auth' middleware to all methods in this controller
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index', 'show']);
         
         // Apply the 'role:author' middleware to specific methods
         $this->middleware('role:author')->only(['create', 'store', 'edit', 'update', 'destroy']);
